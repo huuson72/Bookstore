@@ -1,0 +1,32 @@
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+.btn-link {
+    color: inherit; /* Giữ nguyên màu chữ mặc định */
+    text-decoration: none; /* Loại bỏ gạch chân */
+}
+
+.btn-link:hover {
+    color: blue; /* Màu khi di chuột */
+    text-decoration: none; /* Gạch chân khi di chuột */
+}
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+.btn-link {
+    margin-right: 0.5em;
+}
+.logout-confirmation {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+}
+.d-none {
+    display: none !important;
+}
