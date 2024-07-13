@@ -7,7 +7,10 @@ public interface DAOInterface<T> {
 
 	public ArrayList<T> selectAll() throws SQLException;
 
-	public T selectById(T t) throws SQLException;
+	static <T> T selectById(T t) {
+
+		return null;
+	}
 
 	public int insert(T t) throws SQLException;
 

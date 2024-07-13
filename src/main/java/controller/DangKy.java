@@ -2,6 +2,7 @@ package controller;
 
 import database.KhachHangDAO;
 import model.KhachHang;
+import util.maHoaMatKhau;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -89,6 +90,8 @@ public class DangKy extends HttpServlet {
 
         if(!matKhau.equals(matKhauNhapLai)) {
             baoLoi +="Mẫu khẩu không khớp.<br/>";
+        }else {
+            matKhau = maHoaMatKhau.toSHA1(matKhau);
         }
 
         request.setAttribute("baoLoi", baoLoi);

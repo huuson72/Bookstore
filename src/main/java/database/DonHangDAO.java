@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DonHangDAO implements DAOInterface<DonHang> {
-    @Override
+
+    
     public ArrayList<DonHang> selectAll() throws SQLException {
         ArrayList<DonHang> ketQua = new ArrayList<DonHang>();
         Connection con = JDBCUtil.getConnection();
@@ -46,11 +47,11 @@ public class DonHangDAO implements DAOInterface<DonHang> {
         return ketQua;
     }
 
-    @Override
+    
     public DonHang selectById(DonHang t) throws SQLException {
         DonHang ketQua = null;
         Connection con = JDBCUtil.getConnection();
-        String sql = "SELECT * FROM donhang WHERE madonhang = ?";
+        String sql = "SELECT * FROM donhang WHERE maDonHang = ?";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getMaDonHang());
@@ -82,11 +83,11 @@ public class DonHangDAO implements DAOInterface<DonHang> {
         return ketQua;
     }
 
-    @Override
+    
     public int insert(DonHang t) throws SQLException {
         int kq = 0;
         Connection con = JDBCUtil.getConnection();
-        String sql = "INSERT INTO donhang(madonhang, khachhang, diachinguoimua, diachinguoinhan, trangthai, thanhtoan,tienthanhtoan, tienthieu,ngaydathang,ngaygiaohang)"
+        String sql = "INSERT INTO donhang(maDonHang, maKhachHang, diaChiMuaHang, diaChiNhanHang, trangThai, hinhThucThanhToan,soTienDaThanhToan, soTienConThieu,ngayDatHang,ngayGiaoHang)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = con.prepareStatement(sql);
@@ -110,7 +111,7 @@ public class DonHangDAO implements DAOInterface<DonHang> {
         return kq;
     }
 
-    @Override
+    
     public int insertAll(ArrayList<DonHang> arr) throws SQLException {
         int kq = 0;
         for (DonHang donHang : arr) {
@@ -119,11 +120,11 @@ public class DonHangDAO implements DAOInterface<DonHang> {
         return kq;
     }
 
-    @Override
+    
     public int delete(DonHang t) throws SQLException {
         int kq = 0;
         Connection con = JDBCUtil.getConnection();
-        String sql = "DELETE FROM donhang WHERE madonhang = ?";
+        String sql = "DELETE FROM donhang WHERE maDonHang = ?";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getMaDonHang());
@@ -135,7 +136,7 @@ public class DonHangDAO implements DAOInterface<DonHang> {
         return kq;
     }
 
-    @Override
+    
     public int deleteAll(ArrayList<DonHang> arr) throws SQLException {
         int kq = 0;
         for (DonHang t : arr) {
@@ -144,14 +145,14 @@ public class DonHangDAO implements DAOInterface<DonHang> {
         return kq;
     }
 
-    @Override
+    
     public int update(DonHang t) throws SQLException {
         int kq = 0;
         Connection con = JDBCUtil.getConnection();
 
-        String sql = "UPDATE donhang" + " SET " + "khachhang=?" + ", diachinguoimua=?" + ",diachinguoinhan=?"
-                + ",trangthai=?" + ",thanhtoan=?" + ",tienthanhtoan=?" + ",tienthieu=?" + ",ngaydathang=?"
-                + ",ngaygiaohang=?" + " WHERE madonhang=?";
+        String sql = "UPDATE donhang" + " SET " + "maKhachHang=?" + ", diaChiMuaHang=?" + ",diaChiNhanHang=?"
+                + ",trangThai=?" + ",hinhThucThanhToan=?" + ",trangThaiThanhToan=?" + ", soTienDaThanhToan =?"+",tienThieu=?" + ",ngayDatHang=?"
+                + ",ngayGiaoHang=?" + " WHERE maDonHang=?";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getKhachHang().getMaKhacHang());
@@ -173,124 +174,39 @@ public class DonHangDAO implements DAOInterface<DonHang> {
         return kq;
     }
 
+    public static void main(String[] args) throws SQLException {
+        DonHangDAO donHangDAO = new DonHangDAO();
+        KhachHangDAO khachHangDAO = new KhachHangDAO();
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKhacHang("KH006");
+        khachHang.setTenDangNhap("testuser");
+        khachHang.setMatKhau("password");
+        khachHang.setHoVaTen("Test User");
+        khachHang.setGioiTinh("Nam");
+        khachHang.setDiaChi("123 Test St");
+        khachHang.setDiaChiMuaHang("123 Test St");
+        khachHang.setDiaChiNhanHang("123 Test St");
+        khachHang.setNgaySinh(java.sql.Date.valueOf("2000-01-01"));
+        khachHang.setSoDienThoai("0987654321");
+        khachHang.setEmail("testuser@example.com");
+        khachHang.setDangKyNhanBangTin(true);
 
-//    @Override
-//    public ArrayList<DonHang> selectAll() {
-//        ArrayList<DonHang> donHangList = new ArrayList<>();
-//        try (Connection conn = JDBCUtil.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM donhang");
-//             ResultSet rs = stmt.executeQuery()) {
-//            while (rs.next()) {
-//                DonHang donHang = new DonHang();
-//                donHang.setMaDonHang(rs.getString("maDonHang"));
-//
-//                // Truy vấn thông tin của KhachHang từ maKhachHang
-//                String maKhachHang = rs.getString("maKhachHang");
-//                KhachHang khachHang = new KhachHangDAO()
-//                        .selectById(new KhachHang(maKhachHang, "", "", "", "", "", "", "", null, "", "", false));
-//                donHang.setKhachHang(khachHang);
-//
-//                donHang.setDiaChiMuaHang(rs.getString("diaChiMuaHang"));
-//                donHang.setDiaChiNhanHang(rs.getString("diaChiNhanHang"));
-//                donHang.setTrangThai(rs.getString("trangThai"));
-//                donHang.setHinhThucThanhToan(rs.getString("hinhThucThanhToan"));
-//                donHang.setTrangThaiThanhToan(rs.getString("trangThaiThanhToan"));
-//                donHang.setSoTienDaThanhToan(rs.getDouble("soTienDaThanhToan"));
-//                donHang.setSoTienConThieu(rs.getDouble("soTienConThieu"));
-//                donHang.setNgayDatHang(rs.getDate("ngayDatHang"));
-//                donHang.setNgayGiaoHang(rs.getDate("ngayGiaoHang"));
-//
-//                donHangList.add(donHang);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return donHangList;
-//    }
-//
-//
-//
-//
-//    public DonHang selectById(DonHang t) {
-//        DonHang ketQua = null;
-//        try {
-//            Connection con = JDBCUtil.getConnection();
-//
-//            String sql = "SELECT * FROM donhang WHERE madonhang=?";
-//            PreparedStatement st = con.prepareStatement(sql);
-//            st.setString(1, t.getMaDonHang());
-//
-//            ResultSet rs = st.executeQuery();
-//
-//            if (rs.next()) {
-//                String maDonHang = rs.getString("maDonHang");
-//                String maKhachHang = rs.getString("maKhachHang");
-//                String diaChiMuaHang = rs.getString("diaChiMuaHang");
-//                String diaChiNhanHang = rs.getString("diaChiNhanHang");
-//                String trangThai = rs.getString("trangThai");
-//                String hinhThucThanhToan = rs.getString("hinhThucThanhToan");
-//                String trangThaiThanhToan = rs.getString("trangThaiThanhToan");
-//                double soTienDaThanhToan = rs.getDouble("soTienDaThanhToan");
-//                double soTienConThieu = rs.getDouble("soTienConThieu");
-//                String ngayDatHang = rs.getString("ngayDatHang");
-//                String ngayGiaoHang = rs.getString("ngayGiaoHang");
-//
-//                ketQua = new DonHang(maDonHang, maKhachHang, diaChiMuaHang, diaChiNhanHang, trangThai,
-//                        hinhThucThanhToan, trangThaiThanhToan, soTienDaThanhToan, soTienConThieu, ngayDatHang, ngayGiaoHang);
-//            }
-//            JDBCUtil.close(con);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return ketQua;
-//    }
-//
-//    @Override
-//    public int insert(DonHang donHang) {
-//        return 0;
-//    }
-//
-//    @Override
-//    public int delete(DonHang donHang) {
-//        return 0;
-//    }
-//
-//    @Override
-//    public int update(DonHang donHang) {
-//        return 0;
-//    }
-//
-//    @Override
-//
-//
-//    public int insertAll(ArrayList arr) {
-//        return 0;
-//    }
-//
-//    @Override
-//
-//
-//    public int deleteAll(ArrayList arr) {
-//        return 0;
-//    }
-//
-//    public static void main(String[] args) {
-//        DonHangDAO donHangDAO = new DonHangDAO();
-//
-//        // Tạo đối tượng DonHang để truy vấn
-//        DonHang donHang = new DonHang();
-//        donHang.setMaDonHang("DH01"); // Thay đổi mã đơn hàng tùy theo nhu cầu kiểm tra
-//
-//        // Gọi phương thức selectById để lấy thông tin đơn hàng từ cơ sở dữ liệu
-//        DonHang result = donHangDAO.selectById(donHang);
-//
-//        // In ra thông tin đơn hàng lấy được từ cơ sở dữ liệu
-//        if (result != null) {
-//            System.out.println("Thông tin Đơn hàng:");
-//            System.out.println(result);
-//        } else {
-//            System.out.println("Không tìm thấy Đơn hàng với mã: " + donHang.getMaDonHang());
-//        }
-//    }
+        // Insert the customer
+        khachHangDAO.insert(khachHang);
+        DonHang donHang = new DonHang();
+        donHang.setMaDonHang("DH06");
+        donHang.setKhachHang(khachHang);
+        donHang.setDiaChiMuaHang("123 Test St");
+        donHang.setDiaChiNhanHang("456 Test Ave");
+        donHang.setTrangThai("Pending");
+        donHang.setHinhThucThanhToan("Credit Card");
+        donHang.setSoTienDaThanhToan(100.0);
+        donHang.setSoTienConThieu(50.0);
+        donHang.setNgayDatHang((java.sql.Date) new Date(System.currentTimeMillis()));
+        donHang.setNgayGiaoHang((java.sql.Date) new Date(System.currentTimeMillis() + 86400000L)); // Ngày giao hàng là ngày mai
+
+        // Thêm đơn hàng vào cơ sở dữ liệu
+        donHangDAO.insert(donHang);
+    }
 
 }

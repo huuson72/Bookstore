@@ -19,4 +19,11 @@ public class DonHang {
 
 	public DonHang(String maDH, KhachHang khachHang, String diaChiNguoiMua, String diaChiNhanHang, String trangThai, String hinhThucThanhToan, double soTienDaThanhToan, double soTienConThieu, Date ngayDatHang, Date ngayGiaoHang) {
 	}
+
+	public DonHang() {
+
+	}
+
+    public DonHang(String currentDate, String maKhacHang) {
+    }
 }

@@ -1,17 +1,12 @@
 package database;
 
-import model.ChiTietDonHang;
-import model.DonHang;
-import model.SanPham;
+import model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
-    @Override
+    
     public ArrayList<ChiTietDonHang> selectAll() {
         ArrayList<ChiTietDonHang> ketQua = new ArrayList<ChiTietDonHang>();
 
@@ -30,15 +25,15 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
             // Bước 4:
 
             while (rs.next()) {
-                String maChiTietDonHang = rs.getString("machitietdonhang");
-                String donhang = rs.getString("donhang");
-                String sanpham = rs.getString("sanpham");
-                double soluong = rs.getDouble("soluong");
-                double giagoc = rs.getDouble("giagoc");
-                double giamgia = rs.getDouble("giamgia");
-                double giaban = rs.getDouble("giaban");
-                double thuevat = rs.getDouble("thuevat");
-                double tongtien = rs.getDouble("tongtien");
+                String maChiTietDonHang = rs.getString("maChiTietDonHang");
+                String donhang = rs.getString("maDonHang");
+                String sanpham = rs.getString("maSanPham");
+                double soluong = rs.getDouble("soLuong");
+                double giagoc = rs.getDouble("giaGoc");
+                double giamgia = rs.getDouble("giamGia");
+                double giaban = rs.getDouble("giaBan");
+                double thuevat = rs.getDouble("thueVAT");
+                double tongtien = rs.getDouble("tongTien");
 
                 DonHang dh = new DonHangDAO().selectById(new DonHang(donhang, null, "", "", "", "", 0, 0, null, null));
                 SanPham sp = new SanPhamDAO().selectById(new SanPham("", "", null, 0, 0, 0, 0, 0, null, "", ""));
@@ -58,13 +53,13 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
         return ketQua;
     }
 
-    @Override
+    
     public ChiTietDonHang selectById(ChiTietDonHang t) {
         ChiTietDonHang ketQua = null;
         try {
             Connection con = JDBCUtil.getConnection();
 
-            String sql = "SELECT * FROM chitietdonhang WHERE machitietdonhang=?";
+            String sql = "SELECT * FROM chitietdonhang WHERE maChiTietDonHang=?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getMaChiTietDonHang());
 
@@ -73,15 +68,15 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
-                String maChiTietDonHang = rs.getString("machitietdonhang");
-                String donhang = rs.getString("donhang");// o
-                String sanpham = rs.getString("sanpham");// o
-                double soluong = rs.getDouble("soluong");
-                double giagoc = rs.getDouble("giagoc");
-                double giamgia = rs.getDouble("giamgia");
-                double giaban = rs.getDouble("giaban");
-                double thuevat = rs.getDouble("thuevat");
-                double tongtien = rs.getDouble("tongtien");
+                String maChiTietDonHang = rs.getString("maChiTietDonHang");
+                String donhang = rs.getString("maDonHang");
+                String sanpham = rs.getString("maSanPham");
+                double soluong = rs.getDouble("soLuong");
+                double giagoc = rs.getDouble("giaGoc");
+                double giamgia = rs.getDouble("giamGia");
+                double giaban = rs.getDouble("giaBan");
+                double thuevat = rs.getDouble("thueVAT");
+                double tongtien = rs.getDouble("tongTien");
 
                 DonHang dh = new DonHangDAO().selectById(new DonHang(donhang, null, "", "", "", "", 0, 0, null, null));
                 SanPham sp = new SanPhamDAO().selectById(new SanPham(sanpham, "", null, 0, 0, 0, 0, 0, null, "", ""));
@@ -100,7 +95,7 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
         return ketQua;
     }
 
-    @Override
+    
     public int insert(ChiTietDonHang t) {
         int ketQua = 0;
         try {
@@ -108,7 +103,7 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
             Connection con = JDBCUtil.getConnection();
 
             // Bước 2: tạo ra đối tượng statement
-            String sql = "INSERT INTO chitietdonhang (machitietdonhang, donhang,sanpham, soluong, giagoc,giamgia,giaban,thuevat,tongtien) "
+            String sql = "INSERT INTO chitietdonhang (maChiTietDonHang, maDonHang,maSanPham, soLuong, giaGoc,giamGia,giaBan,thueVAT,tongTien) "
                     + " VALUES (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement st = con.prepareStatement(sql);
@@ -138,7 +133,7 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
         return ketQua;
     }
 
-    @Override
+    
     public int insertAll(ArrayList<ChiTietDonHang> arr) {
         int dem = 0;
         for (ChiTietDonHang ChiTietDonHang : arr) {
@@ -147,7 +142,7 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
         return dem;
     }
 
-    @Override
+    
     public int delete(ChiTietDonHang t) {
         int ketQua = 0;
         try {
@@ -155,7 +150,7 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
             Connection con = JDBCUtil.getConnection();
 
             // Bước 2: tạo ra đối tượng statement
-            String sql = "DELETE from chitietdonhang " + " WHERE machitietdonhang=?";
+            String sql = "DELETE from chitietdonhang " + " WHERE maChiTietDonHang=?";
 
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getMaChiTietDonHang());
@@ -178,7 +173,7 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
         return ketQua;
     }
 
-    @Override
+    
     public int deleteAll(ArrayList<ChiTietDonHang> arr) {
         int dem = 0;
         for (ChiTietDonHang ChiTietDonHang : arr) {
@@ -187,7 +182,7 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
         return dem;
     }
 
-    @Override
+    
     public int update(ChiTietDonHang t) {
         int ketQua = 0;
         try {
@@ -195,8 +190,8 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
             Connection con = JDBCUtil.getConnection();
 
             // Bước 2: tạo ra đối tượng statement
-            String sql = "UPDATE chitietdonhang SET donhang=?, sanpham=?, soluong=?, giagoc=?, giamgia=?, giaban=?, thuevat=?, tongtien=?"
-                    + " WHERE machitietdonhang=?";
+            String sql = "UPDATE chitietdonhang SET maDonHang=?, maSanPham=?, soLuong=?, giaGoc=?, giamGia=?, giaBan=?, thueVAT=?, tongTien=?"
+                    + " WHERE maChiTietDonHang=?";
 
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getDonHang().getMaDonHang());
@@ -224,199 +219,105 @@ public class ChiTietDonHangDAO implements DAOInterface<ChiTietDonHang> {
     }
 
 
-//    @Override
-//    public ArrayList<ChiTietDonHang> selectAll() {
-//        ArrayList<ChiTietDonHang> chiTietDonHangList = new ArrayList<>();
-//        String query = "SELECT * FROM chitietdonhang";
-//
-//        try (Connection conn = JDBCUtil.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query);
-//             ResultSet rs = stmt.executeQuery()) {
-//
-//            while (rs.next()) {
-//                String maChiTietDonHang = rs.getString("maChiTietDonHang");
-//                String maDonHang = rs.getString("maDonHang");
-//                String maSanPham = rs.getString("maSanPham");
-//                double soLuong = rs.getDouble("soLuong");
-//                double giaGoc = rs.getDouble("giaGoc");
-//                double giamGia = rs.getDouble("giamGia");
-//                double giaBan = rs.getDouble("giaBan");
-//                double thueVAT = rs.getDouble("thueVAT");
-//                double tongTien = rs.getDouble("tongTien");
-//
-//                DonHang donHang = new DonHangDAO().selectById(new DonHang(maDonHang, null, null, null, null, null, 0, 0, null, null));
-//                if (donHang == null) {
-//                    System.out.println("Không tìm thấy đơn hàng với ID: " + maDonHang);
-//                    continue;  // Bỏ qua chi tiết đơn hàng này
-//                }
-//
-//                SanPham sanPham = new SanPhamDAO().selectById(new SanPham(maSanPham, null, null, 0, 0, 0, 0, 0, null, null, null));
-//                if (sanPham == null) {
-//                    System.out.println("Không tìm thấy sản phẩm với ID: " + maSanPham);
-//                    continue;  // Bỏ qua chi tiết đơn hàng này
-//                }
-//
-//                ChiTietDonHang chiTietDonHang = new ChiTietDonHang(maChiTietDonHang, donHang, sanPham,
-//                        soLuong, giaGoc, giamGia, giaBan, thueVAT, tongTien);
-//                chiTietDonHangList.add(chiTietDonHang);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return chiTietDonHangList;
-//    }
-//
-//
-//    @Override
-//    public ChiTietDonHang selectById(ChiTietDonHang t) {
-//        ChiTietDonHang ketQua = null;
-//        try {
-//            Connection con = JDBCUtil.getConnection();
-//
-//            String sql = "SELECT * FROM chitietdonhang WHERE machitietdonhang=?";
-//            PreparedStatement st = con.prepareStatement(sql);
-//            st.setString(1, t.getMaChiTietDonHang());
-//
-//            // Bước 3: thực thi câu lệnh SQL
-//            System.out.println(sql);
-//            ResultSet rs = st.executeQuery();
-//
-//            while (rs.next()) {
-//                String maChiTietDonHang = rs.getString("machitietdonhang");
-//                String donhang = rs.getString("madonhang");// o
-//                String sanpham = rs.getString("masanpham");// o
-//                double soluong = rs.getDouble("soluong");
-//                double giagoc = rs.getDouble("giagoc");
-//                double giamgia = rs.getDouble("giamgia");
-//                double giaban = rs.getDouble("giaban");
-//                double thuevat = rs.getDouble("thuevat");
-//                double tongtien = rs.getDouble("tongtien");
-//
-//                DonHang dh = new DonHangDAO().selectById(new DonHang(donhang, null, "", "", "", "", 0, 0, null, null));
-//                SanPham sp = new SanPhamDAO().selectById(new SanPham(sanpham, "", null, 0, 0, 0, 0, 0, null, "", ""));
-//
-//                ketQua = new ChiTietDonHang(maChiTietDonHang, dh, sp, soluong, giagoc, giamgia, giaban, thuevat,
-//                        tongtien);
-//                break;
-//            }
-//            // Bước 5:
-//            JDBCUtil.close(con);
-//        } catch (SQLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//
-//        return ketQua;
-//    }
-//
-//    @Override
-//    public int insert(ChiTietDonHang chiTietDonHang) {
-//        int rowsAffected = 0;
-//        String query = "INSERT INTO chitietdonhang (maChiTietDonHang, ...) VALUES (?, ...)";
-//
-//        try (Connection conn = JDBCUtil.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//
-//            stmt.setString(1, chiTietDonHang.getMaChiTietDonHang());
-//            // Set các giá trị khác cho câu lệnh INSERT tại đây
-//
-//            rowsAffected = stmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return rowsAffected;
-//    }
-//
-//    @Override
-//    public int insertAll(ArrayList<ChiTietDonHang> arr) {
-//        int rowsAffected = 0;
-//        String query = "INSERT INTO chitietdonhang (maChiTietDonHang, ...) VALUES (?, ...)";
-//
-//        try (Connection conn = JDBCUtil.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//
-//            for (ChiTietDonHang chiTietDonHang : arr) {
-//                stmt.setString(1, chiTietDonHang.getMaChiTietDonHang());
-//                // Set các giá trị khác cho câu lệnh INSERT tại đây
-//
-//                rowsAffected += stmt.executeUpdate();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return rowsAffected;
-//    }
-//
-//    @Override
-//    public int delete(ChiTietDonHang chiTietDonHang) {
-//        int rowsAffected = 0;
-//        String query = "DELETE FROM chitietdonhang WHERE maChiTietDonHang = ?";
-//
-//        try (Connection conn = JDBCUtil.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//
-//            stmt.setString(1, chiTietDonHang.getMaChiTietDonHang());
-//            rowsAffected = stmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return rowsAffected;
-//    }
-//
-//    @Override
-//    public int deleteAll(ArrayList<ChiTietDonHang> arr) {
-//        int rowsAffected = 0;
-//        String query = "DELETE FROM chitietdonhang WHERE maChiTietDonHang = ?";
-//
-//        try (Connection conn = JDBCUtil.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//
-//            for (ChiTietDonHang chiTietDonHang : arr) {
-//                stmt.setString(1, chiTietDonHang.getMaChiTietDonHang());
-//                rowsAffected += stmt.executeUpdate();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return rowsAffected;
-//    }
-//
-//    @Override
-//    public int update(ChiTietDonHang chiTietDonHang) {
-//        int rowsAffected = 0;
-//        String query = "UPDATE chitietdonhang SET ... WHERE maChiTietDonHang = ?";
-//
-//        try (Connection conn = JDBCUtil.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//
-//            // Set các giá trị mới cho câu lệnh UPDATE tại đây
-//
-//            stmt.setString(1, chiTietDonHang.getMaChiTietDonHang());
-//
-//            rowsAffected = stmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return rowsAffected;
-//    }
-//    public static void main(String[] args) {
-//        ChiTietDonHangDAO chiTietDonHangDAO = new ChiTietDonHangDAO();
-//
-//        // Test selectAll
-//        ArrayList<ChiTietDonHang> chiTietDonHangList = chiTietDonHangDAO.selectAll();
-//
-//        // In ra thông tin của các chi tiết đơn hàng
-//        for (ChiTietDonHang chiTietDonHang : chiTietDonHangList) {
-//            System.out.println(chiTietDonHang);
-//        }
-//    }
 
+    public static void main(String[] args) throws SQLException {
+        ChiTietDonHangDAO chiTietDonHangDAO = new ChiTietDonHangDAO();
+        DonHangDAO donHangDAO = new DonHangDAO();
+        KhachHangDAO khachHangDAO = new KhachHangDAO();
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+
+        // Tạo một khách hàng mới để thêm vào đơn hàng
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKhacHang("KH04");
+        khachHang.setTenDangNhap("testuser");
+        khachHang.setMatKhau("password");
+        khachHang.setHoVaTen("Test User");
+        khachHang.setGioiTinh("Nam");
+        khachHang.setDiaChi("123 Test St");
+        khachHang.setDiaChiMuaHang("123 Test St");
+        khachHang.setDiaChiNhanHang("123 Test St");
+        khachHang.setNgaySinh(java.sql.Date.valueOf("2000-01-01"));
+        khachHang.setSoDienThoai("0987654321");
+        khachHang.setEmail("testuser@example.com");
+        khachHang.setDangKyNhanBangTin(true);
+
+        // Insert the customer
+        khachHangDAO.insert(khachHang);
+
+        // Tạo một đơn hàng mới
+        DonHang donHang = new DonHang();
+        donHang.setMaDonHang("DH04");
+        donHang.setKhachHang(khachHang);
+        donHang.setDiaChiMuaHang("123 Test St");
+        donHang.setDiaChiNhanHang("456 Test Ave");
+        donHang.setTrangThai("Pending");
+        donHang.setHinhThucThanhToan("Credit Card");
+        donHang.setSoTienDaThanhToan(100.0);
+        donHang.setSoTienConThieu(50.0);
+        donHang.setNgayDatHang(new Date(System.currentTimeMillis()));
+        donHang.setNgayGiaoHang(new Date(System.currentTimeMillis() + 86400000L));
+
+        // Thêm đơn hàng vào cơ sở dữ liệu
+        donHangDAO.insert(donHang);
+        // Tạo tác giả và thể loại cho sản phẩm
+        TacGia tacGia = new TacGia();
+        tacGia.setMaTacGia("TG04");
+        tacGia.setHoVaTen("Test Author");
+        TheLoai theLoai = new TheLoai();
+        theLoai.setMaTheLoai("TL04");
+        theLoai.setTenTheLoai("Test Category");
+
+        // Tạo một sản phẩm mới
+        SanPham sanPham = new SanPham();
+        sanPham.setMaSanPham("SP04");
+        sanPham.setTenSanPham("Test Product");
+        sanPham.setTacGia(tacGia);
+        sanPham.setNamXuatBan(2023);
+        sanPham.setGiaNhap(800.0);
+        sanPham.setGiaGoc(1000.0);
+        sanPham.setGiaBan(1200.0);
+        sanPham.setSoLuong(100);
+        sanPham.setTheLoai(theLoai);
+        sanPham.setNgonNgu("Vietnamese");
+        sanPham.setMoTa("This is a test product.");
+
+        // Thêm sản phẩm vào cơ sở dữ liệu
+        sanPhamDAO.insert(sanPham);
+
+        // Tạo một chi tiết đơn hàng mới
+        ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
+        chiTietDonHang.setMaChiTietDonHang("CTDH03");
+        chiTietDonHang.setDonHang(donHang);
+        chiTietDonHang.setSanPham(sanPham);
+        chiTietDonHang.setSoLuong(2);
+        chiTietDonHang.setGiaGoc(1000.0);
+        chiTietDonHang.setGiamGia(0.1);
+        chiTietDonHang.setGiaBan(1200.0);
+        chiTietDonHang.setThueVAT(0.1);
+        chiTietDonHang.setTongTien(2400.0);
+
+        // Thêm chi tiết đơn hàng vào cơ sở dữ liệu
+        chiTietDonHangDAO.insert(chiTietDonHang);
+
+        // Lấy chi tiết đơn hàng vừa thêm và in thông tin ra
+        ChiTietDonHang selectedChiTietDonHang = chiTietDonHangDAO.selectById(chiTietDonHang);
+        if (selectedChiTietDonHang != null) {
+            System.out.println("Selected ChiTietDonHang: " + selectedChiTietDonHang.getMaChiTietDonHang() + ", " + selectedChiTietDonHang.getTongTien());
+        }
+
+        // Cập nhật số lượng chi tiết đơn hàng
+        selectedChiTietDonHang.setSoLuong(3);
+        chiTietDonHangDAO.update(selectedChiTietDonHang);
+
+        // Lấy tất cả các chi tiết đơn hàng và in ra thông tin từng chi tiết đơn hàng
+        ArrayList<ChiTietDonHang> chiTietDonHangList = chiTietDonHangDAO.selectAll();
+        for (ChiTietDonHang ctdh : chiTietDonHangList) {
+            System.out.println(ctdh.getMaChiTietDonHang() + ", " + ctdh.getSoLuong());
+        }
+
+        // Xóa chi tiết đơn hàng vừa cập nhật
+        chiTietDonHangDAO.delete(selectedChiTietDonHang);
+    }
 
 
 }

@@ -12,7 +12,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 
 	private ArrayList<TheLoai> data = new ArrayList<>();
 
-	@Override
+	
 	public ArrayList<TheLoai> selectAll() {
 		ArrayList<TheLoai> ketQua = new ArrayList<TheLoai>();
 		try {
@@ -29,8 +29,8 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 
 			// Bước 4:
 			while (rs.next()) {
-				String maTheLoai = rs.getString("matheloai");
-				String tenTheLoai = rs.getString("tentheloai");
+				String maTheLoai = rs.getString("maTheLoai");
+				String tenTheLoai = rs.getString("tenTheLoai");
 
 				TheLoai tl = new TheLoai(maTheLoai, tenTheLoai);
 				ketQua.add(tl);
@@ -46,7 +46,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 		return ketQua;
 	}
 
-	@Override
+	
 	public TheLoai selectById(TheLoai t) {
 		TheLoai ketQua = null;
 		try {
@@ -54,7 +54,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 			Connection con = JDBCUtil.getConnection();
 
 			// Bước 2: tạo ra đối tượng statement
-			String sql = "SELECT * FROM theloai WHERE matheloai=?";
+			String sql = "SELECT * FROM theloai WHERE maTheLoai=?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getMaTheLoai());
 
@@ -64,8 +64,8 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 
 			// Bước 4:
 			while (rs.next()) {
-				String maTheLoai = rs.getString("matheloai");
-				String tenTheLoai = rs.getString("tentheloai");
+				String maTheLoai = rs.getString("maTheLoai");
+				String tenTheLoai = rs.getString("tenTheLoai");
 
 				ketQua = new TheLoai(maTheLoai, tenTheLoai);
 				break;
@@ -80,7 +80,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 		return ketQua;
 	}
 
-	@Override
+	
 	public int insert(TheLoai t) {
 		int ketQua = 0;
 		try {
@@ -88,7 +88,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 			Connection con = JDBCUtil.getConnection();
 
 			// Bước 2: tạo ra đối tượng statement
-			String sql = "INSERT INTO theloai (matheloai, tentheloai) "+
+			String sql = "INSERT INTO theloai (maTheLoai, tenTheLoai) "+
 					" VALUES (?,?)";
 
 			PreparedStatement st = con.prepareStatement(sql);
@@ -112,7 +112,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 		return ketQua;
 	}
 
-	@Override
+	
 	public int insertAll(ArrayList<TheLoai> arr) {
 		int dem = 0;
 		for (TheLoai theLoai : arr) {
@@ -121,7 +121,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 		return dem;
 	}
 
-	@Override
+	
 	public int delete(TheLoai t) {
 		int ketQua = 0;
 		try {
@@ -130,7 +130,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 
 			// Bước 2: tạo ra đối tượng statement
 			String sql = "DELETE from theloai "+
-					" WHERE matheloai=?";
+					" WHERE maTheLoai=?";
 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getMaTheLoai());
@@ -153,7 +153,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 		return ketQua;
 	}
 
-	@Override
+	
 	public int deleteAll(ArrayList<TheLoai> arr) {
 		int dem = 0;
 		for (TheLoai TheLoai : arr) {
@@ -162,7 +162,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 		return dem;
 	}
 
-	@Override
+	
 	public int update(TheLoai t) {
 		int ketQua = 0;
 		try {
@@ -173,7 +173,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 			String sql = "UPDATE theloai "+
 					" SET " +
 					" tenTheLoai=?"+
-					" WHERE matheloai=?";
+					" WHERE maTheLoai=?";
 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getTenTheLoai());
@@ -217,7 +217,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 //		return theLoaiList;
 //	}
 //
-//	@Override
+//	
 //	public TheLoai selectById(TheLoai theLoai) {
 //		TheLoai result = null;
 //		String query = "SELECT * FROM theloai WHERE maTheLoai = ?";
@@ -238,7 +238,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 //		}
 //		return result;
 //	}
-//	@Override
+//	
 //	public int insert(TheLoai theLoai) {
 //		int rowsAffected = 0;
 //		String query = "INSERT INTO TheLoai (maTheLoai, tenTheLoai) VALUES (?, ?)";
@@ -257,7 +257,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 //		return rowsAffected;
 //	}
 //
-//	@Override
+//	
 //	public int insertAll(ArrayList<TheLoai> arr) {
 //		int rowsAffected = 0;
 //		String query = "INSERT INTO TheLoai (maTheLoai, tenTheLoai) VALUES (?, ?)";
@@ -282,7 +282,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 //		return rowsAffected;
 //	}
 //
-//	@Override
+//	
 //	public int delete(TheLoai theLoai) {
 //		int rowsAffected = 0;
 //		String query = "DELETE FROM TheLoai WHERE maTheLoai = ?";
@@ -300,7 +300,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 //		return rowsAffected;
 //	}
 //
-//	@Override
+//	
 //	public int deleteAll(ArrayList<TheLoai> arr) {
 //		int rowsAffected = 0;
 //		String query = "DELETE FROM TheLoai WHERE maTheLoai = ?";
@@ -324,7 +324,7 @@ public class TheLoaiDAO implements DAOInterface<TheLoai> {
 //		return rowsAffected;
 //	}
 //
-//	@Override
+//	
 //	public int update(TheLoai theLoai) {
 //		int rowsAffected = 0;
 //		String query = "UPDATE TheLoai SET tenTheLoai = ? WHERE maTheLoai = ?";

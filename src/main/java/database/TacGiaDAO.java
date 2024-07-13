@@ -23,10 +23,10 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 
 			// Bước 4:
 			while(rs.next()) {
-				String maTacGia = rs.getString("matacgia");
-				String hoVaTen = rs.getString("hovaten");
-				Date ngaySinh = rs.getDate("ngaysinh");
-				String tieuSu = rs.getString("tieusu");
+				String maTacGia = rs.getString("maTacGia");
+				String hoVaTen = rs.getString("hoVaTen");
+				Date ngaySinh = rs.getDate("ngaySinh");
+				String tieuSu = rs.getString("tieuSu");
 
 				TacGia tg = new TacGia(maTacGia, hoVaTen, (java.sql.Date) ngaySinh, tieuSu);
 				ketQua.add(tg);
@@ -42,7 +42,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 		return ketQua;
 	}
 
-	@Override
+
 	public TacGia selectById(TacGia t) {
 		TacGia ketQua = null;
 		try {
@@ -50,7 +50,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 			Connection con = JDBCUtil.getConnection();
 
 			// Bước 2: tạo ra đối tượng statement
-			String sql = "SELECT * FROM tacgia WHERE matacgia=?";
+			String sql = "SELECT * FROM tacgia WHERE maTacGia=?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getMaTacGia());
 
@@ -60,10 +60,10 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 
 			// Bước 4:
 			while(rs.next()) {
-				String maTacGia = rs.getString("matacgia");
-				String hoVaTen = rs.getString("hovaten");
-				Date ngaySinh = rs.getDate("ngaysinh");
-				String tieuSu = rs.getString("tieusu");
+				String maTacGia = rs.getString("maTacGia");
+				String hoVaTen = rs.getString("hoVaTen");
+				Date ngaySinh = rs.getDate("ngaySinh");
+				String tieuSu = rs.getString("tieuSu");
 
 				ketQua = new TacGia(maTacGia, hoVaTen, (java.sql.Date) ngaySinh, tieuSu);
 				break;
@@ -79,7 +79,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 	}
 
 
-	@Override
+	
 	public int insert(TacGia t) {
 		int ketQua = 0;
 		try {
@@ -87,7 +87,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 			Connection con = JDBCUtil.getConnection();
 
 			// Bước 2: tạo ra đối tượng statement
-			String sql = "INSERT INTO tacgia (matacgia, hovaten, ngaysinh, tieusu) "+
+			String sql = "INSERT INTO tacgia (maTacGia, hoVaTen, ngaySinh, tieuSu) "+
 					" VALUES (?,?,?,?)";
 
 			PreparedStatement st = con.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 		return ketQua;
 	}
 
-	@Override
+	
 	public int insertAll(ArrayList<TacGia> arr) {
 		int dem = 0;
 		for (TacGia tacGia : arr) {
@@ -122,7 +122,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 		return dem;
 	}
 
-	@Override
+	
 	public int delete(TacGia t) {
 		int ketQua = 0;
 		try {
@@ -131,7 +131,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 
 			// Bước 2: tạo ra đối tượng statement
 			String sql = "DELETE from tacgia "+
-					" WHERE matacgia=?";
+					" WHERE maTacGia=?";
 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getMaTacGia());
@@ -154,7 +154,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 		return ketQua;
 	}
 
-	@Override
+	
 	public int deleteAll(ArrayList<TacGia> arr) {
 		int dem = 0;
 		for (TacGia tacGia : arr) {
@@ -163,7 +163,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 		return dem;
 	}
 
-	@Override
+	
 	public int update(TacGia t) {
 		int ketQua = 0;
 		try {
@@ -173,10 +173,10 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 			// Bước 2: tạo ra đối tượng statement
 			String sql = "UPDATE tacgia "+
 					" SET " +
-					" hovaten=?"+
-					", ngaysinh=?"+
-					", tieusu=?"+
-					" WHERE matacgia=?";
+					" hoVaTen=?"+
+					", ngaySinh=?"+
+					", tieuSu=?"+
+					" WHERE maTacGia=?";
 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getHoVaTen());
@@ -230,7 +230,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 		tgd.update(tg);
 	}
 
-//	@Override
+//	
 //	public ArrayList<TacGia> selectAll() {
 //		ArrayList<TacGia> tacGiaList = new ArrayList<>();
 //        Connection connection = null;
@@ -260,7 +260,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 //		return tacGiaList;
 //	}
 //
-//	@Override
+//	
 //
 //
 //	public TacGia selectById(TacGia t) {
@@ -285,7 +285,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 //		}
 //		return tacGia;
 //	}
-//	@Override
+//	
 //	public int insert(TacGia t) {
 //		int result = 0;
 //        Connection connection = null;
@@ -311,7 +311,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 //		return result;
 //	}
 //
-//	@Override
+//	
 //	public int insertAll(ArrayList<TacGia> arr) {
 //		int result = 0;
 //		for (TacGia tacGia : arr) {
@@ -320,7 +320,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 //		return result;
 //	}
 //
-//	@Override
+//	
 //	public int delete(TacGia t) {
 //		int result = 0;
 //        Connection connection = null;
@@ -343,7 +343,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 //		return result;
 //	}
 //
-//	@Override
+//	
 //	public int deleteAll(ArrayList<TacGia> arr) {
 //		int result = 0;
 //		for (TacGia tacGia : arr) {
@@ -352,7 +352,7 @@ public class TacGiaDAO implements DAOInterface<TacGia> {
 //		return result;
 //	}
 //
-//	@Override
+//	
 //	public int update(TacGia t) {
 //		int result = 0;
 //        Connection connection = null;

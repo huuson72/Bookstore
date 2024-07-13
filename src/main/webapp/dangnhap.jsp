@@ -135,7 +135,7 @@
     <div class="text-center">
         <img class="mb-4" src="<%=url %>/img/logo/logo.png" alt="" width="72">
         <h1 class="h3 mb-3 fw-normal">Chào, <%= khachHang.getTenDangNhap() %>!</h1>
-        <form action="dang-xuat" method="POST">
+        <form action="dang-xuat" method="POST">s
         <button class="w-100 btn btn-lg btn-primary" type="submit">Đăng xuất</button>
     </form>
     </div>

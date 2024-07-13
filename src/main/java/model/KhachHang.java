@@ -22,4 +22,7 @@ public class KhachHang {
     public KhachHang() {
 
     }
+
+    public KhachHang(String kh001) {
+    }
 }

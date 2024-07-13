@@ -1,14 +1,28 @@
+.nav-item.dropdown .dropdown-toggle::after {
+    content: "";
+    display: inline-block;
+    margin-left: 0.255em; /* Điều chỉnh khoảng cách giữa chữ "Tài khoản" và mũi tên */
+    vertical-align: 0.255em; /* Điều chỉnh căn lề dọc của mũi tên */
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+.nav-item.dropdown .dropdown-toggle::before {
+    display: none; /* Ẩn mũi tên ở đầu chữ "Tài khoản" */
+}
+
 .card-img-top {
     width: 100%;
     height: auto;
 }
 .btn-link {
-    color: inherit; /* Giữ nguyên màu chữ mặc định */
+    color: black; /* Giữ nguyên màu chữ mặc định */
     text-decoration: none; /* Loại bỏ gạch chân */
 }
 
 .btn-link:hover {
-    color: blue; /* Màu khi di chuột */
+    color: green; /* Màu khi di chuột */
     text-decoration: none; /* Gạch chân khi di chuột */
 }
 .d-flex {
@@ -29,4 +43,33 @@
 }
 .d-none {
     display: none !important;
+}
+.product-card {
+    height:auto; /* Thiết lập chiều cao cố định cho thẻ sản phẩm */
+    display: flex;
+    flex-direction: column;
+}
+.img-container {
+    height: 400px; /* Thiết lập chiều cao cố định cho ảnh */
+    overflow: hidden; /* Ẩn phần ảnh vượt quá chiều cao */
+
+}
+.img-container img {
+    /*height: 100%; !* Thiết lập chiều cao ảnh chiếm 100% chiều cao của khung chứa *!*/
+
+    /*object-fit: cover; !* Ảnh sẽ bao phủ toàn bộ khung chứa mà không bị biến dạng *!*/
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.input-group {
+    margin-top: auto; /* Đẩy nhóm input xuống dưới cùng của thẻ sản phẩm */
+}
+.row .col-lg-12{
+    padding-top: 50px;
 }

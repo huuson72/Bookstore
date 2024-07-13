@@ -2,6 +2,7 @@ package controller;
 
 import database.KhachHangDAO;
 import model.KhachHang;
+import util.maHoaMatKhau;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class DangNhap extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tenDangNhap = request.getParameter("tenDangNhap");
         String matKhau = request.getParameter("matKhau");
+        matKhau = maHoaMatKhau.toSHA1(matKhau);
         KhachHang kh = new KhachHang();
         kh.setTenDangNhap(tenDangNhap);
         kh.setMatKhau(matKhau);
