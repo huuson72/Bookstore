@@ -32,27 +32,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="vnpay_payment" method="post">
+<form action="VNPayServlet" method="post">
+    <label for="amount">Số tiền:</label>
+    <input type="text" id="amount" name="amount" value="10000" />
 
-    <div class="form-group">
-        <label for="amount">Số tiền (VND):</label>
-        <input type="text" class="form-control" id="amount" name="amount" required>
-    </div>
-    <div class="form-group">
-        <label for="orderDescription">Mô tả thanh toán:</label>
-        <input type="text" class="form-control" id="orderDescription" name="orderDescription" required>
-    </div>
-    <div class="form-group">
-        <label for="bankCode">Mã ngân hàng:</label>
-        <input type="text" class="form-control" id="bankCode" name="bankCode">
-    </div>
-    <div class="form-group">
-        <label for="language">Ngôn ngữ:</label>
-        <input type="text" class="form-control" id="language" name="language">
-    </div>
-    <div class="form-group">
-        <label for="orderInfo">Thông tin hóa đơn:</label>
-        <input type="text" class="form-control" id="orderInfo" name="orderInfo" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Thanh toán</button>
+    <label for="orderId">Mã đơn hàng:</label>
+    <input type="text" id="orderId" name="orderId" value="123456" />
+
+    <input type="hidden" name="orderType" value="billpayment" />
+
+    <button type="submit">Thanh toán qua VNPay</button>
 </form>

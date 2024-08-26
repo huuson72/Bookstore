@@ -319,9 +319,7 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return ketQua;
-	}
+		return ketQua;}
 
 //	public static void main(String[] args) {
 //		// Khởi tạo đối tượng SanPham với mã sản phẩm cần tìm

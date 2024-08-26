@@ -1,19 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.Map"%>
-<%@ page import="controller.VNPayReturnServlet"%>
-<%@ page import="util.VNPayConfig"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="util.VNPayUtils" %>
+
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Xử lý kết quả thanh toán</title>
+    <title>Kết quả thanh toán</title>
 </head>
 <body>
-<h1>Xử lý kết quả thanh toán</h1>
-<%-- Lấy thông tin kết quả từ VNPay --%>
 <%
-    VNPayReturnServlet returnServlet = new VNPayReturnServlet();
-    returnServlet.doGet(request, response);
+    // Lấy các tham số trả về từ VNPay
+    Map<String, String> vnp_Params = new HashMap<>();
+    for (Map.Entry<String, String[]> param : request.getParameterMap().entrySet()) {
+        vnp_Params.put(param.getKey(), param.getValue()[0]);
+    }
+
+    // Lấy chữ ký từ VNPay
+    String vnp_SecureHash = request.getParameter("vnp_SecureHash");
+
+    // Chuỗi bí mật tạo checksum (vnp_HashSecret)
+    String vnp_HashSecret = "2ANZRIFQZ4DYGC47N7VYPYF6FKD8G4TP"; //
+
+    // Xác thực chữ ký
+    boolean checkSignature = VNPayUtils.validateSignature(vnp_Params, vnp_SecureHash, vnp_HashSecret);
+    if (checkSignature) {
+        // Giao dịch thành công
+        String vnp_Amount = request.getParameter("vnp_Amount");
+        String vnp_OrderInfo = request.getParameter("vnp_OrderInfo");
+        System.out.println("<h2>Giao dịch thành công!</h2>");
+        System.out.println("<p>Số tiền: " + vnp_Amount + "</p>");
+        System.out.println("<p>Thông tin đơn hàng: " + vnp_OrderInfo + "</p>");
+    } else {
+        // Giao dịch thất bại do chữ ký không hợp lệ
+        System.out.println("<h2>Giao dịch thất bại!</h2>");
+        System.out.println("<p>Chữ ký không hợp lệ!</p>");
+    }
 %>
 </body>
 </html>

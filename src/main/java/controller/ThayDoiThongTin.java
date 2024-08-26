@@ -69,7 +69,8 @@ public class ThayDoiThongTin extends HttpServlet {
                 khachHang = (KhachHang)obj;
             if(khachHang!=null){
                 String maKhachHang = khachHang.getMaKhacHang();
-                KhachHang kh = new KhachHang(maKhachHang, "", "", hoVaTen, gioiTinh, diaChiKhachHang, diaChiNhanHang, diaChiMuaHang, Date.valueOf(ngaySinh), dienThoai, email, dongYNhanMail!=null);
+                KhachHang kh = new KhachHang(maKhachHang, "", "", hoVaTen, gioiTinh, diaChiKhachHang, diaChiNhanHang, diaChiMuaHang,
+                        Date.valueOf(ngaySinh), dienThoai, email, dongYNhanMail!=null);
                 khachHangDAO.updateInfo(kh);
                 KhachHang kh2 = khachHangDAO.selectById(kh);
                 request.getSession().setAttribute("khachHang", kh2);
@@ -81,7 +82,7 @@ public class ThayDoiThongTin extends HttpServlet {
         RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
         System.out.println("Ho va ten: " + hoVaTen);
         System.out.println("Gioi tinh: " + gioiTinh);
-// In các giá trị khác tương tự
+
 
         rd.forward(request, response);
     }

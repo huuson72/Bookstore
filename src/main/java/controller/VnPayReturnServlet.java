@@ -1,7 +1,7 @@
 package controller;
 
 
-import util.VnPayUtils;
+import util.VNPayUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,16 +25,19 @@ public class VnPayReturnServlet extends HttpServlet {
         String secureHash = fields.remove("vnp_SecureHash");
         String vnp_HashSecret = "2ANZRIFQZ4DYGC47N7VYPYF6FKD8G4TP";
 
-        if (VnPayUtils.validateChecksum(fields, vnp_HashSecret, secureHash)) {
+        if (VNPayUtils.validateSignature(fields, vnp_HashSecret, secureHash)) {
             // Xử lý kết quả giao dịch tại đây
             String responseCode = fields.get("vnp_ResponseCode");
             if ("00".equals(responseCode)) {
-                // Giao dịch thành công
+                System.out.println("Giao dich thanh cong");
             } else {
                 // Giao dịch thất bại
+                System.out.println("Giao dich that bai ");
+
             }
         } else {
-            // Chữ ký không hợp lệ
+            System.out.println("Chu ki khong hop le");
+
         }
     }
 }

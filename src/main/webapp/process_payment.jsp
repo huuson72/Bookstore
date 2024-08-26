@@ -43,8 +43,6 @@
     SanPhamDAO sanPhamDAO = new SanPhamDAO();
     DecimalFormat df = new DecimalFormat("#,###.##");
     double total = 0;
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -100,7 +98,7 @@
         <% } %>
         </tbody>
     </table>
-    <a href="confirm_payment.jsp" class="btn btn-primary mt-3">Thanh toán</a>
+    <a href="thanhtoan.jsp" class="btn btn-primary mt-3">Thanh toán</a>
     <a href="index.jsp" class="btn btn-primary mt-3">Tiếp tục mua sắm</a>
 </div>
 </body>
